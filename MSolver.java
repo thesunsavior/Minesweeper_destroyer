@@ -549,6 +549,8 @@ void chordOn(int i, int j) : double click ( search for "chord minesweeper")
     int countFlagsAround(boolean[][] array, int i, int j) :     How many flags exist around this square?
     int countFreeSquaresAround(int[][] board, int i, int j): count unopened square  around  square (i,j )
 
+*/
+
     static void tankRecurse(ArrayList<Pair> borderTiles, int depth) {
         // End game case
         int flag_count = 0;
@@ -623,7 +625,7 @@ void chordOn(int i, int j) : double click ( search for "chord minesweeper")
     }
 
 
- */
+
 
     public static void main(String[] args) throws Throwable {
         Thread.sleep(2000);
@@ -737,7 +739,7 @@ void chordOn(int i, int j) : double click ( search for "chord minesweeper")
             this.second = second;
         }
     }
-}}
+}
 
 
 
