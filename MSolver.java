@@ -532,6 +532,78 @@ public class MSolver{
 
 
 
+    static void tankRecurse(ArrayList<Pair> borderTiles, int depth) {
+        // End game case
+        int flag_count = 0;
+        for (int i=0; i<BoardHeight; i++) {
+            for (int j = 0; j < BoardWidth; j++) {
+                if (known_mine[i][j]) {
+                    flag_count += 1;
+                }
+                int num_mine_around = tank_board[i][j];
+                // if unopened/outside boundary/mines/error
+                if (num_mine_around < 0) {
+                    continue;
+                }
+
+                // calculate surround squares
+                int num_surround = 0;
+                if ((i == 0 && j == 0) || (i == BoardHeight - 1 && j == BoardWidth - 1)) {
+                    num_surround = 3;
+                } else if (i == 0 || j == 0 || i == BoardHeight - 1 || j == BoardWidth - 1) {
+                    num_surround = 5;
+                } else {
+                    num_surround = 8;
+                }
+
+                // calculate number of unopen and flag square
+                int num_flag = countFlagsAround(known_mine, i, j);
+                int num_free = countFlagsAround(known_empty, i, j);
+
+                // if number of surrounding flag square is more than the current square number
+                if (num_flag > num_mine_around) {
+                    return;
+                }
+                // num of open square is smaller than the current square number
+                if (num_surround - num_free < num_mine_around) {
+                    return;
+                }
+            }
+        }
+        if (flag_count > TOT_MINES) {
+            return;
+        }
+
+        if (depth == borderTiles.size()) {
+            if (!border_optimization && flag_count < TOT_MINES) {
+                return;
+            }
+            boolean[] solution = new boolean[borderTiles.size()];
+            for (int loc=0; loc<borderTiles.size(); loc++) {
+                Pair<Integer, Integer> curr_loc = borderTiles.get(loc);
+                int loc_i = curr_loc.getFirst();
+                int loc_j = curr_loc.getSecond();
+                solution[loc] = known_mine[loc_i][loc_j];
+            }
+            tank_solution.add(solution);
+            return;
+        }
+
+        // recursion
+        Pair<Integer, Integer> next_loc = borderTiles.get(depth);
+        int next_loc_i = next_loc.getFirst();
+        int next_loc_j = next_loc.getSecond();
+
+        // next square is mine
+        known_mine[next_loc_i][next_loc_j] = true;
+        tankRecurse(borderTiles, depth+1);
+        known_mine[next_loc_i][next_loc_j] = false;
+
+        // next square is not mine
+        known_empty[next_loc_i][next_loc_j] = true;
+        tankRecurse(borderTiles, depth+1);
+        known_empty[next_loc_i][next_loc_j] = false;
+    }
 
 
     public static void main(String[] args) throws Throwable {
@@ -649,5 +721,8 @@ class Pair<A, B> {
     public void setSecond(B second) {
         this.second = second;
     }
-}
+}}
+
+
+
 
