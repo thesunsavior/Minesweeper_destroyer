@@ -1,8 +1,7 @@
 import java.awt.*;
-import Minesweeper_destroyer.src.Base;
+import base.Base;
 
 public class MSolver {
-
 
 
   /*
@@ -34,10 +33,9 @@ void chordOn(int i, int j) : double click ( search for "chord minesweeper")
     int countFlagsAround(boolean[][] array, int i, int j) :     How many flags exist around this square?
     int countFreeSquaresAround(int[][] board, int i, int j): count unopened square  around  square (i,j )
 
-
-
+    int BoardWidth : number of columns of the board
+    int BoardHeigth: number of rows of the board
  */
-// Code start here ---------------------------------------------------------------------------------------------------
     public static void main(String[] args) throws Throwable {
         Thread.sleep(2000);
         Base.robot = new Robot();
@@ -80,8 +78,8 @@ void chordOn(int i, int j) : double click ( search for "chord minesweeper")
             // Exit on death
             if (status == -10) exit();
 
-//            attemptFlagMine();
-//            attemptMove();
+            Base.attemptFlagMine();
+            Base.attemptMove();
         }
 
 
