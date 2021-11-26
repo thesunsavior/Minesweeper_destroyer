@@ -85,7 +85,7 @@ void chordOn(int i, int j) : double click ( search for "chord minesweeper")
 
     }
 
-    static void exit() {
+    static public void exit() {
         // For any reason, we want to exit
         //System.out.println("Steps: " + numMines);
         System.exit(0);

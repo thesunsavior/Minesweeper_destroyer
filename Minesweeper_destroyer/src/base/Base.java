@@ -216,6 +216,8 @@ public class Base {
         int mouseX = BoardTopW + (int) (j * BoardPix);
         int mouseY = BoardTopH + (int) (i * BoardPix);
         moveMouse(mouseX, mouseY);
+//        onScreen[i][j] = -3;
+//        flags[i][j] = true;
 
         robot.mousePress(4);
         Thread.sleep(5);
