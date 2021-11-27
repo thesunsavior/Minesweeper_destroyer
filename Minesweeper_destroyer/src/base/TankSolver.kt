@@ -311,11 +311,13 @@ class TankSolver {
                 mark[i][j] = true
                 for (k in 0..7)
                     if (Base.onScreen(i + xx[k], j + yy[k]) != -10 && tank_checker[i + xx[k]][j + yy[k]] > 0) {
+                        var tx = i+xx[k]
+                        var ty = j+yy[k]
                         for (l in 0..7)
-                            if (Base.onScreen(i + xx[l], j + yy[l]) != -10 && tank_checker[i + xx[l]][j + yy[l]] == -1 && !mark[i + xx[l]][j + yy[l]]
-                            )
-                                if (abs(xx[k] - xx[l]) <= 1 && abs(yy[k] - yy[l]) <= 1)
-                                    DFS(i + xx[l], j + yy[l])
+                            if (Base.onScreen(tx + xx[l], ty + yy[l]) != -10 && tank_checker[tx + xx[l]][ty + yy[l]] == -1 && !mark[tx + xx[l]][ty + yy[l]])
+//                            if (Base.onScreen(i + xx[l], j + yy[l]) != -10 && tank_checker[i + xx[l]][j + yy[l]] == -1 && !mark[i + xx[l]][j + yy[l]])
+//                                if (abs(xx[k] - xx[l]) <= 1 && abs(yy[k] - yy[l]) <= 1)
+                                    DFS(tx + xx[l], ty + yy[l])
                     }
             }
 
