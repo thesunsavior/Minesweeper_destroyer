@@ -2,7 +2,36 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import base.Base;
 
-public class StraightFwd{
+public class StraightFwd extends Base{
+    private DoublyLinkedList<Base> cellsToAnalyze;
+
+    void attemptStraightFwd(){
+        boolean success = false;
+        cellsToAnalyze = new DoublyLinkedList<Base>();
+        
+        for(int h=0; h<BoardHeight; h++){
+            for(int w=0; w<BoardWidth; w++){
+                int freeSquares = countFreeSquaresAround(onScreen,h,w);
+                if(onScreen(h,w) >= 1 && freeSquares >= 1){
+                    // append to DLL
+
+
+                    ///////////
+    
+                        if(freeSquares - mines > 1){
+                            chordOn(h,w);
+                            onScreen[h][w] = 0; 
+                            continue;
+                        }
+
+                    }
+                }
+            }
+
+    }
+
+
+    
 
 }
 
