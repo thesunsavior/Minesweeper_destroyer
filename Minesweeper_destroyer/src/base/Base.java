@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import base.TankSolver;
+import base.StraightFwd;
 
 /*
 Initial setup to get working:
@@ -564,44 +565,45 @@ public class Base {
     static public void attemptMove() throws Throwable{
 
         boolean success = false;
-        for(int i=0; i<BoardHeight; i++){
-            for(int j=0; j<BoardWidth; j++){
+        // for(int i=0; i<BoardHeight; i++){
+        //     for(int j=0; j<BoardWidth; j++){
 
-                if(onScreen(i,j) >= 1){
+        //         if(onScreen(i,j) >= 1){
 
-                    // Count how many mines around it
-                    int curNum = onScreen[i][j];
-                    int mines = countFlagsAround(flags,i,j);
-                    int freeSquares = countFreeSquaresAround(onScreen,i,j);
+        //             // Count how many mines around it
+        //             int curNum = onScreen[i][j];
+        //             int mines = countFlagsAround(flags,i,j);
+        //             int freeSquares = countFreeSquaresAround(onScreen,i,j);
 
 
-                    // Click on the deduced non-mine squares
-                    if(curNum == mines && freeSquares > mines){
-                        success = true;
+        //             // Click on the deduced non-mine squares
+        //             if(curNum == mines && freeSquares > mines){
+        //                 success = true;
 
-                        // Use the chord or the classical algorithm
-                        if(freeSquares - mines > 1){
-                            chordOn(i,j);
-                            onScreen[i][j] = 0; // hack to make it not overclick a square
-                            continue;
-                        }
+        //                 // Use the chord or the classical algorithm
+        //                 if(freeSquares - mines > 1){
+        //                     chordOn(i,j);
+        //                     onScreen[i][j] = 0; // hack to make it not overclick a square
+        //                     continue;
+        //                 }
 
-                        // Old algorithm: don't chord
-                        for(int ii=0; ii<BoardHeight; ii++){
-                            for(int jj=0; jj<BoardWidth; jj++){
-                                if(Math.abs(ii-i)<=1 && Math.abs(jj-j)<=1){
-                                    if(onScreen(ii,jj) == -1 && !flags[ii][jj]){
-                                        clickOn(ii,jj);
-                                        onScreen[ii][jj] = 0;
-                                    }
-                                }
-                            }
-                        }
+        //                 // Old algorithm: don't chord
+        //                 for(int ii=0; ii<BoardHeight; ii++){
+        //                     for(int jj=0; jj<BoardWidth; jj++){
+        //                         if(Math.abs(ii-i)<=1 && Math.abs(jj-j)<=1){
+        //                             if(onScreen(ii,jj) == -1 && !flags[ii][jj]){
+        //                                 clickOn(ii,jj);
+        //                                 onScreen[ii][jj] = 0;
+        //                             }
+        //                         }
+        //                     }
+        //                 }
 
-                    }
-                }
-            }
-        }
+        //             }
+        //         }
+        //     }
+        // }
+        StraightFwd.attemptStraightFwd();
 
         if(success) return;
 
